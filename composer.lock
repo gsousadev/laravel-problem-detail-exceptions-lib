@@ -1566,12 +1566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "e759a4b033226e4cb1a11d147092bd86c7dedc7f"
+                "reference": "99cc989f45abda765d85d858959b1b12ef11d950"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/e759a4b033226e4cb1a11d147092bd86c7dedc7f",
-                "reference": "e759a4b033226e4cb1a11d147092bd86c7dedc7f",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/99cc989f45abda765d85d858959b1b12ef11d950",
+                "reference": "99cc989f45abda765d85d858959b1b12ef11d950",
                 "shasum": ""
             },
             "require": {
@@ -1671,7 +1671,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-30T13:21:56+00:00"
+            "time": "2023-08-01T12:43:04+00:00"
         },
         {
             "name": "symfony/mime",
@@ -2345,12 +2345,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "383f2aa1c575155cbde1067810881fa8967b870c"
+                "reference": "918dd68ca5f257ad0ba42df0bce40088af20e2f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/383f2aa1c575155cbde1067810881fa8967b870c",
-                "reference": "383f2aa1c575155cbde1067810881fa8967b870c",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/918dd68ca5f257ad0ba42df0bce40088af20e2f6",
+                "reference": "918dd68ca5f257ad0ba42df0bce40088af20e2f6",
                 "shasum": ""
             },
             "require": {
@@ -2432,7 +2432,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-31T07:16:29+00:00"
+            "time": "2023-08-01T08:05:37+00:00"
         },
         {
             "name": "symfony/translation-contracts",
