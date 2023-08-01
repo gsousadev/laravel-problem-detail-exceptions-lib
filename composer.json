@@ -4,7 +4,7 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Picpay\\LaravelProblemDetailExceptions\\": "src/"
+            "LaravelProblemDetailExceptions\\": "src/"
         }
     },
     "authors": [
@@ -16,7 +16,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Picpay\\LaravelProblemDetaildExceptions\\ProblemDetailExceptionsProvider"
+                "LaravelProblemDetaildExceptions\\ProblemDetailExceptionsProvider"
             ]
         }
     },

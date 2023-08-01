@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Illuminate\Support\ServiceProvider;
 
-
 class ProblemDetailExceptionsProvider extends ServiceProvider
 {
     public function register()
