@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaravelProblemDetailExceptions;
+namespace gsousadev\LaravelProblemDetailExceptions;
 
 use Illuminate\Support\ServiceProvider;
 
