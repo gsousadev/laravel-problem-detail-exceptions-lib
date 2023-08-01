@@ -1,0 +1,50 @@
+### dotenv ###
+.env
+.env.backup
+
+### Laravel ###
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+bootstrap/compiled.php
+app/storage/
+public/storage
+public/hot
+public_html/storage
+public_html/hot
+storage/*.key
+Homestead.yaml
+Homestead.json
+/.vagrant
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+.history
+.ionide
+
+# PHP Unit Code Coverage HTML Report
+reports/
+.phpunit.cache/
+.phpunit.result.cache
+phpunit.report.xml
+phpunit.coverage.xml
+
+# Docker Compose
+docker-compose.override.yml
+
+# Homestead
+Homestead.json
+Homestead.yaml
+
+# PHP Storm
+/.idea
+
+report
+--report
