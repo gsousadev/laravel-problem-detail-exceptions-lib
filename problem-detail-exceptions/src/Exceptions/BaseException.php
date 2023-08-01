@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace gsousadev\LaravelProblemDetailExceptions\Exceptions;
+namespace Gsousadev\LaravelProblemDetailExceptions\Exceptions;
 
 use Exception;
 use Illuminate\Http\Response;
