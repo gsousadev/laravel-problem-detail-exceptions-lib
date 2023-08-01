@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace gsousadev\LaravelProblemDetailExceptions\Exceptions;
+namespace Gsousadev\LaravelProblemDetailExceptions\Exceptions;
 
-use gsousadev\LaravelProblemDetailExceptions\Enums\InternalErrorCodeEnum;
+use Gsousadev\LaravelProblemDetailExceptions\Enums\InternalErrorCodeEnum;
 use Symfony\Component\HttpFoundation\Response;
 
 class ExampleException extends BaseException

@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use gsousadev\LaravelProblemDetailExceptions\Enums\InternalErrorCodeEnum;
+use Gsousadev\LaravelProblemDetailExceptions\Enums\InternalErrorCodeEnum;
 
 abstract class BaseException extends Exception implements ProblemDetailExceptionInterface
 {
