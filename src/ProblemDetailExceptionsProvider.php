@@ -17,7 +17,7 @@ class ProblemDetailExceptionsProvider extends ServiceProvider
     {
         $this->publishes(
             [
-                __DIR__ . '/config/problem-detail-exceptions.php' => config_path('shoppingcart.php'),
+                __DIR__ . '/config/problem-detail-exceptions.php' => config_path('problem-detail-exceptions.php'),
             ],
             'config'
         );
