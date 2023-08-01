@@ -1,5 +1,5 @@
 {
-    "name": "picpay/laravel-problem-detail-exceptions-lib",
+    "name": "gsousadev/laravel-problem-detail-exceptions-lib",
     "description": "Pacote feito para padronizar o uso de exceptions com o formato de 'problem details'",
     "type": "library",
     "autoload": {
