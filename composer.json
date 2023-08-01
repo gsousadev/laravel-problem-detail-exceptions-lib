@@ -1,0 +1,29 @@
+{
+    "name": "picpay/laravel-problem-detail-exceptions-lib",
+    "description": "Pacote feito para padronizar o uso de exceptions com o formato de 'problem details'",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Picpay\\LaravelProblemDetailExceptions\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "gsousadev",
+            "email": "guilherme.sousa@picpay.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Picpay\\LaravelProblemDetaildExceptions\\ProblemDetailExceptionsProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/http": "*",
+        "illuminate/support": "*",
+        "laravel/helpers": "^1.6"
+    }
+}
