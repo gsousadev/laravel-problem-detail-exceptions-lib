@@ -17,7 +17,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelProblemDetaildExceptions\\ProblemDetailExceptionsProvider"
+                "LaravelProblemDetailExceptions\\ProblemDetailExceptionsProvider"
             ]
         }
     },
