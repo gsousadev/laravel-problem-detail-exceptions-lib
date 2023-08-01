@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelProblemDetailExceptions\Exceptions;
+namespace gsousadev\LaravelProblemDetailExceptions\Exceptions;
 
 
 use Illuminate\Http\Request;

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace LaravelProblemDetailExceptions\Exceptions;
+namespace gsousadev\LaravelProblemDetailExceptions\Exceptions;
 
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use LaravelProblemDetailExceptions\Enums\InternalErrorCodeEnum;
+use gsousadev\LaravelProblemDetailExceptions\Enums\InternalErrorCodeEnum;
 
 abstract class BaseException extends Exception implements ProblemDetailExceptionInterface
 {

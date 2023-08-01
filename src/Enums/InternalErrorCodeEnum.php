@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaravelProblemDetailExceptions\Enums;
+namespace gsousadev\LaravelProblemDetailExceptions\Enums;
 
 enum InternalErrorCodeEnum: string
 {
