@@ -73,7 +73,7 @@ abstract class BaseException extends Exception implements ProblemDetailException
     public function report(): bool
     {
         Log::error(
-            '['.config('problem-detail-exception.log_app_name').'][' . $this->internalCode->name . ']',
+            '['. config('problem-detail-exception.log_app_name') . '][' . $this->internalCode->name . ']',
             $this->toArray()
         );
 
