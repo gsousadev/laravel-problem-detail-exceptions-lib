@@ -1,10 +1,11 @@
 <?php
 
-namespace Exceptions;
+namespace LaravelProblemDetailExceptions\Exceptions;
 
-use Enums\InternalErrorCodeEnum;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use LaravelProblemDetailExceptions\Enums\InternalErrorCodeEnum;
 
 interface ProblemDetailExceptionInterface extends \Throwable
 {

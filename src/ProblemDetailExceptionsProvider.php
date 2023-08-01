@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+namespace LaravelProblemDetailExceptions;
+
 use Illuminate\Support\ServiceProvider;
+
 
 class ProblemDetailExceptionsProvider extends ServiceProvider
 {
