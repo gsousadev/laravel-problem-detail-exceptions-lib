@@ -4,13 +4,14 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "LaravelProblemDetailExceptions\\": "src/"
+            "gsousadev/LaravelProblemDetailExceptions\\": "src/"
         }
     },
+    "license": "mit",
     "authors": [
         {
             "name": "gsousadev",
-            "email": "guilherme.sousa@picpay.com"
+            "email": "gsousadev@gmail.com"
         }
     ],
     "extra": {
@@ -20,6 +21,7 @@
             ]
         }
     },
+    "minimum-stability": "dev",
     "require": {
         "php": "^8.2",
         "illuminate/http": "*",
