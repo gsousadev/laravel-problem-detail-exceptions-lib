@@ -4,7 +4,7 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "gsousadev\\LaravelProblemDetailExceptions\\": "src/"
+            "Gsousadev\\LaravelProblemDetailExceptions\\": "src/"
         }
     },
     "license": "mit",
@@ -17,7 +17,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "gsousadev\\LaravelProblemDetailExceptions\\ProblemDetailExceptionsProvider.php"
+                "Gsousadev\\LaravelProblemDetailExceptions\\ProblemDetailExceptionsProvider.php"
             ]
         }
     },
