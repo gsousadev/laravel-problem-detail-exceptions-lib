@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exceptions;
+namespace App\Exceptions;
 
 use Symfony\Component\HttpFoundation\Response;
 use Gsousadev\LaravelProblemDetailExceptions\Exceptions\BaseException;
