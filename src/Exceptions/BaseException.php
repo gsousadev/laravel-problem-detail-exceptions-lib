@@ -20,7 +20,7 @@ abstract class BaseException extends Exception implements ProblemDetailException
         protected string $userTitle = 'Unexpected Error',
         protected string $userMessage = 'Unexpected Error',
         protected int $httpStatus = Response::HTTP_INTERNAL_SERVER_ERROR,
-        protected InternalErrorCodeEnum $internalCode = InternalErrorCodeEnum::UNEX0001,
+        protected string $internalCode = 'UNEX0000',
         protected ?\Throwable $previous = null
     ) {
         $this->message = $this->title . ' - ' . $this->detail;
@@ -36,8 +36,7 @@ abstract class BaseException extends Exception implements ProblemDetailException
             'title'                => $this->title,
             'status'               => $this->httpStatus ?? $this->code,
             'detail'               => $this->detail,
-            'internal_code'        => $this->internalCode->name,
-            'internal_description' => $this->internalCode->value,
+            'internal_code'        => $this->internalCode,
             'message'              => $this->message,
             'user_message'         => $this->userMessage,
             'user_title'           => $this->userTitle,
@@ -73,7 +72,7 @@ abstract class BaseException extends Exception implements ProblemDetailException
     public function report(): bool
     {
         Log::error(
-            '['. config('problem-detail-exception.log_app_name') . '][' . $this->internalCode->name . ']',
+            '['. config('problem-detail-exception.log_app_name') . '][' . $this->internalCode . ']',
             $this->toArray()
         );
 
@@ -107,12 +106,7 @@ abstract class BaseException extends Exception implements ProblemDetailException
 
     public function getInternalCode(): string
     {
-        return $this->internalCode->name;
-    }
-
-    public function getInternalDescription(): string
-    {
-        return $this->internalCode->value;
+        return $this->internalCode;
     }
 }
 

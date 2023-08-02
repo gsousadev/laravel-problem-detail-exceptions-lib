@@ -15,7 +15,7 @@ interface ProblemDetailExceptionInterface extends \Throwable
         string $userTitle,
         string $userMessage,
         int $httpStatus,
-        InternalErrorCodeEnum $internalCode,
+        string $internalCode,
         ?\Throwable $previous
     );
 

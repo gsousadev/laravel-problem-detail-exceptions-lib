@@ -16,7 +16,7 @@ class ExampleException extends BaseException
     protected string $userMessage = 'Detalhamento amigavel para usuário que pode ver o erro';
 
     protected int $httpStatus = Response::HTTP_BAD_REQUEST;
-    protected InternalErrorCodeEnum $internalCode = InternalErrorCodeEnum::SHRD0001;
+    protected string $internalCode = 'SHRD0001';
 
 
 }

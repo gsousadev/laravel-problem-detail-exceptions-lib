@@ -21,5 +21,11 @@ class ProblemDetailExceptionsProvider extends ServiceProvider
             ],
             'config'
         );
+
+        $this->publishes(
+            [
+                __DIR__ . '/Exceptions/ExampleException.php' => app_path('Exceptions/ExampleException.php')
+            ]
+        );
     }
 }
