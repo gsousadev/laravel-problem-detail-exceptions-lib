@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Exceptions;
 
 use Symfony\Component\HttpFoundation\Response;
+use Gsousadev\LaravelProblemDetailExceptions\Exceptions\BaseException;
 
 class ExampleException extends BaseException
 {

@@ -5,7 +5,6 @@ namespace Gsousadev\LaravelProblemDetailExceptions\Exceptions;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Gsousadev\LaravelProblemDetailExceptions\Enums\InternalErrorCodeEnum;
 
 interface ProblemDetailExceptionInterface extends \Throwable
 {
@@ -30,8 +29,6 @@ interface ProblemDetailExceptionInterface extends \Throwable
     public function getHttpStatus(): int;
 
     public function getInternalCode(): string;
-
-    public function getInternalDescription(): string;
 
     public function toArray(): array;
 
