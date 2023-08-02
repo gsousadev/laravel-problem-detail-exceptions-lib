@@ -26,7 +26,7 @@ abstract class BaseException extends Exception implements ProblemDetailException
         $this->message = $this->title . ' - ' . $this->detail;
         $this->code = $this->httpStatus;
         $this->instance = get_class($this);
-        $this->logAppName = config('problem-detail-exception.log_app_name');
+        $this->logAppName = config('problem-detail-exceptions.log_app_name');
         parent::__construct();
     }
 
