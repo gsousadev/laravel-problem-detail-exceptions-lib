@@ -44,7 +44,7 @@ Homestead.json
 Homestead.yaml
 
 # PHP Storm
-/.idea
+.idea
 
 report
 --report
