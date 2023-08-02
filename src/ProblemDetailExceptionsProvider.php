@@ -12,7 +12,7 @@ class ProblemDetailExceptionsProvider extends ServiceProvider
     public function register()
     {
         if (! app()->configurationIsCached()) {
-            $this->mergeConfigFrom(__DIR__.'/../config/problem-detail-exceptions.php', 'problem-detail-exceptions');
+            $this->mergeConfigFrom(__DIR__.'/config/problem-detail-exceptions.php', 'problem-detail-exceptions');
         }
     }
 
