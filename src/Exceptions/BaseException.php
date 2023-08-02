@@ -8,11 +8,11 @@ use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Gsousadev\LaravelProblemDetailExceptions\Enums\InternalErrorCodeEnum;
 
 abstract class BaseException extends Exception implements ProblemDetailExceptionInterface
 {
     protected string $instance = self::class;
+    private string $logAppName;
 
     public function __construct(
         protected string $title = 'Unexpected Error',
@@ -26,6 +26,7 @@ abstract class BaseException extends Exception implements ProblemDetailException
         $this->message = $this->title . ' - ' . $this->detail;
         $this->code = $this->httpStatus;
         $this->instance = get_class($this);
+        $this->logAppName = config('problem-detail-exception.log_app_name');
         parent::__construct();
     }
 
@@ -72,7 +73,7 @@ abstract class BaseException extends Exception implements ProblemDetailException
     public function report(): bool
     {
         Log::error(
-            '['. config('problem-detail-exception.log_app_name') . '][' . $this->internalCode . ']',
+            '['. $this->logAppName . '][' . $this->internalCode . ']',
             $this->toArray()
         );
 
