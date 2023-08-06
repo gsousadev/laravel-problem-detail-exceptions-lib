@@ -2,6 +2,9 @@
 .env
 .env.backup
 
+### Mac ###
+.DS_Store
+
 ### Laravel ###
 /vendor/
 node_modules/
