@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use Gsousadev\LaravelProblemDetailExceptions\Exceptions\ProblemDetailException;
 use Symfony\Component\HttpFoundation\Response;
-use Gsousadev\LaravelProblemDetailExceptions\Exceptions\BaseException;
 
-class ExampleException extends BaseException
+class ExampleException extends ProblemDetailException
 {
     protected string $title = 'Titulo curto para erro. Deve ser imutável';
     protected string $detail = 'Descrição mais detalhada do erro podendo conter variaveis dinâmicas.' .

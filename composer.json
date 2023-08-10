@@ -4,7 +4,8 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Gsousadev\\LaravelProblemDetailExceptions\\": "src/"
+            "Gsousadev\\LaravelProblemDetailExceptions\\": "src/",
+            "Tests\\": "tests/"
         }
     },
     "license": "MIT",
@@ -24,7 +25,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.2",
-        "illuminate/http": "*",
-        "illuminate/support": "*"
+        "illuminate/support": "^8",
+        "illuminate/http": "^8"
     }
 }
