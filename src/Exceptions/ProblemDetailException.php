@@ -29,7 +29,7 @@ abstract class ProblemDetailException extends Exception
         $this->message = $this->title . ' - ' . $this->detail;
         $this->code = $this->httpStatus;
         $this->instance = get_class($this);
-        $this->logAppName = strtoupper(config('problem-detail-exceptions.log_app_name'));
+        $this->logAppName = strtoupper(config('problem-detail-exceptions.app_name'));
 
         $this->validateConfigFields();
         $this->renderableFields = $this->generateRenderableFieldsByConfig();
