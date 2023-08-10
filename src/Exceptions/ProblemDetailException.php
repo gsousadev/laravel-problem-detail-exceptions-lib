@@ -10,35 +10,37 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-abstract class ProblemDetailException extends Exception implements ProblemDetailExceptionInterface
+abstract class ProblemDetailException extends Exception
 {
     protected string $instance = self::class;
     private string $logAppName;
     private array $renderableFields;
+    private array $fields;
 
     public function __construct(
-        protected string $title,
-        protected string $detail,
-        protected string $userTitle,
-        protected string $userMessage,
-        protected int $httpStatus,
-        protected string $internalCode,
-        protected ?\Throwable $previous = null
+        private string $title,
+        private string $detail,
+        private string $userTitle,
+        private string $userMessage,
+        private int $httpStatus,
+        private string $internalCode,
+        private ?\Throwable $previous = null
     ) {
         $this->message = $this->title . ' - ' . $this->detail;
         $this->code = $this->httpStatus;
         $this->instance = get_class($this);
         $this->logAppName = strtoupper(config('problem-detail-exceptions.log_app_name'));
-        $this->validateRenderableFieldsConfig();
-        $this->renderableFields = $this->generateRenderableFiledsByConfig();
 
+        $this->validateConfigFields();
+        $this->renderableFields = $this->generateRenderableFieldsByConfig();
+        $this->fields = $this->generateFieldsFieldsByConfig();
 
         parent::__construct($this->message, $this->code, $this->previous);
     }
 
     public function toArray(): array
     {
-        return [
+        $allFields = [
             ExceptionsFieldsEnum::TYPE->value          => $this->instance,
             ExceptionsFieldsEnum::TITLE->value         => $this->title,
             ExceptionsFieldsEnum::STATUS->value        => $this->httpStatus ?? $this->code,
@@ -50,6 +52,14 @@ abstract class ProblemDetailException extends Exception implements ProblemDetail
             ExceptionsFieldsEnum::LOCATION->value      => $this->file . ':' . $this->line,
             ExceptionsFieldsEnum::TRACE_ID->value      => data_get(Log::sharedContext(), 'trace_id'),
         ];
+
+        return array_filter(
+            $allFields,
+            function ($key) {
+                return in_array($key, $this->fields);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
     }
 
     public function render(Request $request): Response
@@ -108,26 +118,41 @@ abstract class ProblemDetailException extends Exception implements ProblemDetail
         return $this->internalCode;
     }
 
-    private function validateRenderableFieldsConfig(): void
+    private function validateConfigFields(): void
     {
         $renderableFields = config('problem-detail-exceptions.renderable_fields');
+        $fields = config('problem-detail-exceptions.fields');
 
-        if (!is_array($renderableFields)) {
-            throw new \InvalidArgumentException('renderable_fields must be an array');
+        if (!is_array($renderableFields) && !is_array($fields)) {
+            throw new \InvalidArgumentException(
+                'renderable_fields must be an array in config/problem-detail-exceptions.php'
+            );
         }
 
-        if (count($renderableFields) === 0) {
-            throw new \InvalidArgumentException('renderable_fields must have at least one element');
+        if (count($renderableFields) === 0 && count($fields) === 0) {
+            throw new \InvalidArgumentException(
+                'renderable_fields must have at least one element in config/problem-detail-exceptions.php'
+            );
         }
 
         foreach ($renderableFields as $renderableField) {
             if (!($renderableField instanceof ExceptionsFieldsEnum)) {
-                throw new \InvalidArgumentException('renderable_fields must be an array of ExceptionsFieldsEnum');
+                throw new \InvalidArgumentException(
+                    'renderable_fields must be an array of ExceptionsFieldsEnum in config/problem-detail-exceptions.php'
+                );
+            }
+        }
+
+        foreach ($fields as $field) {
+            if (!($field instanceof ExceptionsFieldsEnum)) {
+                throw new \InvalidArgumentException(
+                    'fields must be an array of ExceptionsFieldsEnum in config/problem-detail-exceptions.php'
+                );
             }
         }
     }
 
-    private function generateRenderableFiledsByConfig(): array
+    private function generateRenderableFieldsByConfig(): array
     {
         $renderableFields = config('problem-detail-exceptions.renderable_fields');
 
@@ -136,6 +161,18 @@ abstract class ProblemDetailException extends Exception implements ProblemDetail
                 return $renderableField->value;
             },
             $renderableFields
+        );
+    }
+
+    private function generateFieldsFieldsByConfig()
+    {
+        $fields = config('problem-detail-exceptions.fields');
+
+        return array_map(
+            function ($field) {
+                return $field->value;
+            },
+            $fields
         );
     }
 }
