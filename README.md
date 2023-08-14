@@ -28,9 +28,9 @@ Para ter dados coerentes dentro do fluxo é importante ter duas variáveis de am
 
 Existe também uma configuração que pode ser feita dentro do arquivo de configuração, informando quais campos devem ser considerados para exceptions de APIs
 
-Devem existir duas configurações: Campos que devem ser usados em qualquer contexto chamado `fields` e campos que devem ser mostrados em chamadas HTTP como resposta em caso de erro `renderable_fields`.
+Existir duas configurações possíveis: Campos que devem ser usados em qualquer contexto chamado `fields` e campos que devem ser mostrados em chamadas HTTP como resposta em casos de erro `renderable_fields`.
 
-*Obs: NÃO RECOMENDAMOS o uso de todos os campos disponíveis, nas respostas HTTP, pois alguns campos podem ter informaçÕes que devem ser guardadas em segurança de não devem ser disponíveis para qualquer pessoa.
+***Obs: NÃO RECOMENDAMOS o uso de todos os campos disponíveis, nas respostas HTTP, pois alguns campos podem ter informaçÕes que devem ser guardadas em segurança de não devem ser disponíveis para qualquer pessoa.***
 
 Todos os campos devem ser cadastrados de acordo com uma classe de Enum, que esta localizada tambem no projeto.
 
