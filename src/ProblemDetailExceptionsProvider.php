@@ -22,13 +22,14 @@ class ProblemDetailExceptionsProvider extends ServiceProvider
             [
                 __DIR__ . '/config/problem-detail-exceptions.php' => config_path('problem-detail-exceptions.php'),
             ],
-            'config'
+            'problem-detail-exceptions'
         );
 
         $this->publishes(
             [
                 __DIR__ . '/Exceptions/ExampleException.php' => app_path('Exceptions/ExampleException.php')
-            ]
+            ],
+            'problem-detail-exceptions'
         );
     }
 }
