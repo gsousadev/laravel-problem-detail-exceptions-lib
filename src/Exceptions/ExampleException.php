@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Exceptions;
 
 use Gsousadev\LaravelProblemDetailExceptions\Exceptions\ProblemDetailException;
-use Symfony\Component\HttpFoundation\Response;
 
 class ExampleException extends ProblemDetailException
 {
@@ -17,7 +16,7 @@ class ExampleException extends ProblemDetailException
                           'Pode ser mutável a cada lançamento dependendo do contexto',
             userTitle:    'Titulo amigavel para usuário final que pode ver o erro',
             userMessage:  'Detalhamento amigavel para usuário que pode ver o erro',
-            httpStatus:   Response::HTTP_BAD_REQUEST,
+            httpStatus:  500,
             internalCode: 'SHRD0001',
             previous:     $previous
         );
