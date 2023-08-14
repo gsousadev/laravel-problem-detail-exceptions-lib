@@ -1,10 +1,13 @@
 # Laravel Problem Detail Exceptions
 
+[![Versão](https://img.shields.io/badge/vers%C3%A3o-0.1.0-beta)](https://github.com/seu-usuario/sua-lib/releases)
+[![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)](https://opensource.org/licenses/MIT)
+
 Esse projeto tem por objetivo prover uma biblioteca Laravel que permite implementar de maneira simples e rápida um padrão de exceptions, seguindo os conceitos da [RFC de problem details](https://datatracker.ietf.org/doc/html/rfc7807)
 
 ## Instalação
 
-O pacote pode ser instalado usando o composer
+O pacote pode ser instalado usando [Composer](https://getcomposer.org/):
 
 ```bash
 composer require gsousadev/laravel-problem-detail-exceptions-lib
