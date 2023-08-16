@@ -27,7 +27,7 @@ class ProblemDetailExceptionsProvider extends ServiceProvider
 
         $this->publishes(
             [
-                __DIR__ . '/Exceptions/ExampleException.php' => app_path('Exceptions/ExampleException.php')
+                __DIR__ . '/Exceptions/ExampleException.php' => app_path('Exceptions/Examples/ParentConstructorException.php')
             ],
             'problem-detail-exceptions'
         );

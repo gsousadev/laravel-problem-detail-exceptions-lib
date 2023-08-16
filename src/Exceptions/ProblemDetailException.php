@@ -27,6 +27,7 @@ abstract class ProblemDetailException extends Exception
         private ?\Throwable $previous = null
     ) {
         $this->message = $this->title . ' - ' . $this->detail;
+        $this->message = $this->previous ? $this->message . ' - ' . $this->previous->getMessage() : $this->message;
         $this->code = $this->httpStatus;
         $this->instance = get_class($this);
         $this->logAppName = strtoupper(config('problem-detail-exceptions.app_name'));
@@ -78,7 +79,7 @@ abstract class ProblemDetailException extends Exception
 
     public function report(): bool
     {
-        if (config('problem-detail-exceptions.log_in_exception')) {
+        if (config('problem-detail-exceptions.enable_log_in_exception')) {
             Log::error(
                 '[' . $this->logAppName . '][' . $this->internalCode . ']',
                 $this->toArray()
@@ -120,8 +121,8 @@ abstract class ProblemDetailException extends Exception
 
     private function validateConfigFields(): void
     {
-        $renderableFields = config('problem-detail-exceptions.renderable_fields');
-        $fields = config('problem-detail-exceptions.fields');
+        $renderableFields = config('problem-detail-exceptions.renderable_fields_list');
+        $fields = config('problem-detail-exceptions.available_fields_list');
 
         if (!is_array($renderableFields) && !is_array($fields)) {
             throw new \InvalidArgumentException(
@@ -154,7 +155,7 @@ abstract class ProblemDetailException extends Exception
 
     private function generateRenderableFieldsByConfig(): array
     {
-        $renderableFields = config('problem-detail-exceptions.renderable_fields');
+        $renderableFields = config('problem-detail-exceptions.renderable_fields_list');
 
         return array_map(
             function ($renderableField) {
@@ -166,7 +167,7 @@ abstract class ProblemDetailException extends Exception
 
     private function generateFieldsFieldsByConfig()
     {
-        $fields = config('problem-detail-exceptions.fields');
+        $fields = config('problem-detail-exceptions.available_fields_list');
 
         return array_map(
             function ($field) {

@@ -139,7 +139,8 @@ try {
 
 ## Contribuindo
 
-O projeto esta em fase de construção da ideia inicial mas apontamentos de melhorias é muito importante para o crescimento. Para informar uma melhoria use as Issues do github.
+O projeto esta em fase de construção da ideia inicial, mas apontamentos de melhorias são muito importantes para o 
+crescimento. Para sugerir uma melhoria use as Issues do github.
 
 ## Licença
 

@@ -6,7 +6,7 @@ namespace App\Exceptions;
 
 use Gsousadev\LaravelProblemDetailExceptions\Exceptions\ProblemDetailException;
 
-class ExampleException extends ProblemDetailException
+class ParentConstructorException extends ProblemDetailException
 {
     public function __construct(?\Throwable $previous = null)
     {
