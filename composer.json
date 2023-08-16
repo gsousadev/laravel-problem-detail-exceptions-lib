@@ -24,8 +24,9 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "php": "^8.2",
-        "illuminate/support": "^10",
-        "illuminate/http": "^10"
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "laravel/framework": "v10.19.0"
     }
 }
