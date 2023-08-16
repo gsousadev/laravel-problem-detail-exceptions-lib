@@ -27,6 +27,6 @@
         "php": "^8.2"
     },
     "require-dev": {
-        "laravel/framework": "v10.19.0"
+        "orchestra/testbench": "v8.1.1"
     }
 }
