@@ -7,7 +7,6 @@ namespace Gsousadev\LaravelProblemDetailExceptions\Exceptions;
 use Exception;
 use Gsousadev\LaravelProblemDetailExceptions\Enums\ExceptionsFieldsEnum;
 use Illuminate\Http\Response;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 abstract class ProblemDetailException extends Exception
@@ -62,7 +61,7 @@ abstract class ProblemDetailException extends Exception
         );
     }
 
-    public function render(Request $request): Response
+    public function render(): Response
     {
         $data = array_filter(
             $this->toArray(),
