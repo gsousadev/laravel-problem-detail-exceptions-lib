@@ -19,7 +19,7 @@ Após a instalação é necessário publicar os arquivos de configuração do pa
 php artisan vendor:publish --tag=problem-detail-exceptions
 ```
 
-Após a publicação do pacote devem ser criados dois arquivos no projeto, o arquivo de configuração `/config/problem-detail-exceptions.php` e uma classe de excessão de exemplo neste caminho `App\Exceptions\ExampleException`.
+Após a publicação do pacote deve ser criado um arquivo de configuração para o projeto no seguinte caminho: `/config/problem-detail-exceptions.php`.
 
 ## Configurando
 
