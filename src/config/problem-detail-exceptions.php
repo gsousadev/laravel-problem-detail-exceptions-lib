@@ -5,7 +5,7 @@ use Gsousadev\LaravelProblemDetailExceptions\Enums\ExceptionsFieldsEnum;
 return [
     'app_name' => env('PROBLEM_DETAIL_EXCEPTION_APP_NAME', 'APP'),
     'enable_log_in_exception' => env('PROBLEM_DETAIL_EXCEPTION_GENERATE_LOGS', true),
-    'available_fields_lists' => [
+    'available_fields_list' => [
         ExceptionsFieldsEnum::TYPE,
         ExceptionsFieldsEnum::TITLE,
         ExceptionsFieldsEnum::STATUS,
