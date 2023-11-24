@@ -137,7 +137,7 @@ try {
 }
 ```
 
-## Padronizando Exceptions
+## Padronizando Exceptions de maneira Automática
 
 Existe uma classe que pode ser usada em conjunto com o Handler de Exceptions do Laravel para permitir que todas as 
 exceptions lançadas e que passem pelo handler possam ser transformadas e normalizadas no padrão 'Problem Detail'. 
