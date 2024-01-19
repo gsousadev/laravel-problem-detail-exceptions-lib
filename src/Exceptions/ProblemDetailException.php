@@ -37,7 +37,7 @@ abstract class ProblemDetailException extends Exception
         parent::__construct($this->message, $this->code, $this->previous);
 
         $isDefaultEnableAndLogThrowNull = (is_null($this->logThrow) &&
-            config('problem-detail-exceptions.enable_log_in_exception'));
+            config('problem-detail-exceptions.log_throw'));
 
         if ($isDefaultEnableAndLogThrowNull || $this->logThrow) {
             Log::error(
@@ -92,7 +92,7 @@ abstract class ProblemDetailException extends Exception
 
     public function report(): bool
     {
-        if (config('problem-detail-exceptions.log_in_exception')) {
+        if (config('problem-detail-exceptions.log_throw')) {
             Log::error(
                 '[' . $this->logAppName . '][' . $this->internalCode . ']',
                 $this->toArray()

@@ -21,6 +21,42 @@ php artisan vendor:publish --tag=problem-detail-exceptions
 
 Após a publicação do pacote deve ser criado um arquivo de configuração para o projeto no seguinte caminho: `/config/problem-detail-exceptions.php`.
 
+```php
+<?php
+
+use Gsousadev\LaravelProblemDetailExceptions\Enums\ExceptionsFieldsEnum;
+
+return [
+    'app_name' => env('PROBLEM_DETAIL_EXCEPTION_APP_NAME', 'APP'),
+    'log_throw' => env('PROBLEM_DETAIL_EXCEPTION_GENERATE_LOGS', true),
+    'available_fields_list' => [
+        ExceptionsFieldsEnum::TYPE,
+        ExceptionsFieldsEnum::TITLE,
+        ExceptionsFieldsEnum::STATUS,
+        ExceptionsFieldsEnum::DETAIL,
+        ExceptionsFieldsEnum::INTERNAL_CODE,
+        ExceptionsFieldsEnum::MESSAGE,
+        ExceptionsFieldsEnum::USER_MESSAGE,
+        ExceptionsFieldsEnum::USER_TITLE,
+        ExceptionsFieldsEnum::LOCATION,
+        ExceptionsFieldsEnum::TRACE_ID,
+        ExceptionsFieldsEnum::PREVIOUS_MESSAGE,
+        ExceptionsFieldsEnum::PREVIOUS_CODE,
+        ExceptionsFieldsEnum::PREVIOUS_TYPE,
+        ExceptionsFieldsEnum::PREVIOUS_LOCATION
+
+    ],
+    'renderable_fields_list' => [
+        ExceptionsFieldsEnum::TITLE,
+        ExceptionsFieldsEnum::STATUS,
+        ExceptionsFieldsEnum::USER_MESSAGE,
+        ExceptionsFieldsEnum::USER_TITLE,
+    ],
+
+];
+
+```
+
 ## Configurando
 
 Este pacote permite algumas configurações de customização. Para isso deve-se user o arquivo `problem-detail-exceptions.php`
@@ -211,7 +247,7 @@ class Handler extends ExceptionHandler
 
 ## Contribuindo
 
-O projeto esta em fase de construção da ideia inicial, mas apontamentos de melhorias são muito importantes para o 
+O projeto esta em fase de construção e apontamentos de melhorias são muito importantes para o 
 crescimento. Para sugerir uma melhoria use as Issues do github.
 
 ## Licença
