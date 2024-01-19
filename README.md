@@ -1,6 +1,6 @@
 # Laravel Problem Detail Exceptions
 
-[![Versão](https://img.shields.io/badge/vers%C3%A3o-1.0.1-beta)](https://github.com/seu-usuario/sua-lib/releases)
+[![Versão](https://img.shields.io/badge/vers%C3%A3o-1.2.0-beta)](https://github.com/seu-usuario/sua-lib/releases)
 [![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)](https://opensource.org/licenses/MIT)
 
 Esse projeto tem por objetivo prover uma biblioteca Laravel que permite implementar de maneira simples e rápida um padrão de exceptions, seguindo os conceitos da [RFC de problem details](https://datatracker.ietf.org/doc/html/rfc7807)
@@ -23,7 +23,7 @@ Após a publicação do pacote deve ser criado um arquivo de configuração para
 
 ## Configurando
 
-Este pacote permite algumas configurações de customização. Para isso deve-se user o arquivo ```problem-detail-exceptions.php```
+Este pacote permite algumas configurações de customização. Para isso deve-se user o arquivo `problem-detail-exceptions.php`
 
 Para ter dados coerentes dentro do fluxo é importante ter duas variáveis de ambiente implementadas:
 - **PROBLEM_DETAIL_EXCEPTION_APP_NAME** : Indica o nome que pode aparecer nos logs referente ao nome do projeto ou app que o pacote esta sendo usado.
@@ -72,7 +72,7 @@ enum ExceptionsFieldsEnum: string
 ```
 
 
-## Usando
+## Criando Exceptions Customizadas
 
 Para usar o pacote recomendamos que sejam criadas excessões extendendo da classe `Gsousadev\LaravelProblemDetailExceptions\Exceptions\ProblemDetailException` conforme a classe de exemplo abaixo:
 
@@ -168,6 +168,46 @@ class ExampleException extends ProblemDetailException
 ...
 ```
 
+### Padronizando Exceptions de maneira Automática
+
+Existe uma classe que pode ser usada em conjunto com o Handler de Exceptions do Laravel para permitir que todas as 
+exceptions lançadas e que passem pelo handler possam ser transformadas e normalizadas no padrão 'Problem Detail'. 
+Isso permite que a aplicação que tenham excetions em formatos diferentes possa rapidamente padronizar a saida dessas 
+exceptions para Logs e Requisições HTTP. Geralmente o arquivo de Handler do laravel esta localizado aqui 
+`App\Exceptions\Handler.php`. Podemos implementar a classe conforme o exemplo abaixo:
+
+
+```php
+
+<?php
+
+namespace App\Exceptions;
+
+use Gsousadev\LaravelProblemDetailExceptions\Exceptions\ProblemDetailException;
+use Gsousadev\LaravelProblemDetailExceptions\Exceptions\UnexpectedException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
+
+class Handler extends ExceptionHandler
+{
+    public function register()
+    {
+        $this->renderable(function (Throwable $e) {
+            if (!$e instanceof ProblemDetailException) {
+                throw new UnexpectedException($e);
+            }
+        });
+    }
+
+    public function report(Throwable $e)
+    {
+        if ($e instanceof ProblemDetailException) {
+            parent::report($e);
+        }
+    }
+}
+
+```
 
 ## Contribuindo
 
