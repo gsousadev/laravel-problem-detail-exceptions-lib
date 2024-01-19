@@ -90,6 +90,18 @@ abstract class ProblemDetailException extends Exception
         return new Response($data, $this->httpStatus);
     }
 
+    public function report(): bool
+    {
+        if (config('problem-detail-exceptions.log_in_exception')) {
+            Log::error(
+                '[' . $this->logAppName . '][' . $this->internalCode . ']',
+                $this->toArray()
+            );
+        }
+
+        return true;
+    }
+
 
     public function getTitle(): string
     {
