@@ -29,6 +29,12 @@ Para ter dados coerentes dentro do fluxo é importante ter duas variáveis de am
 - **PROBLEM_DETAIL_EXCEPTION_APP_NAME** : Indica o nome que pode aparecer nos logs referente ao nome do projeto ou app que o pacote esta sendo usado.
 - **PROBLEM_DETAIL_EXCEPTION_GENERATE_LOGS** : Esta variável permite que sejam ligados e desligados os logs que devem ser publicados em casos de erro.
 
+Ex: 
+```dotenv
+PROBLEM_DETAIL_EXCEPTION_APP_NAME=nome_do_aplicativo
+PROBLEM_DETAIL_EXCEPTION_GENERATE_LOGS=true
+```
+
 Existe também uma configuração que pode ser feita dentro do arquivo de configuração, informando quais campos devem ser considerados para exceptions de APIs
 
 Existir duas configurações possíveis: Campos que devem ser usados em qualquer contexto chamado `fields` e campos que devem ser mostrados em chamadas HTTP como resposta em casos de erro `renderable_fields`.
@@ -56,7 +62,12 @@ enum ExceptionsFieldsEnum: string
     case USER_TITLE = 'user_title';
     case LOCATION = 'location';
     case TRACE_ID = 'trace_id';
+    case PREVIOUS_MESSAGE = 'previous_message';
+    case PREVIOUS_TYPE = 'previous_type';
+    case PREVIOUS_CODE = 'previous_code';
+    case PREVIOUS_LOCATION = 'previous_location';
 }
+
 
 ```
 
@@ -136,6 +147,27 @@ try {
     throw new ExampleException($exception);
 }
 ```
+
+### Log por Exception
+
+Tambem é possível configurar o log em cada exception usando a opção `$logThrow`. Essa opção permite que possamos 
+configurar cada excessão para gerar logs, ou não, independente da configuração geral. Caso ela seja omitida a 
+configuração geral de logs será levada em consideração.
+
+Ex: 
+
+```php
+...
+
+class ExampleException extends ProblemDetailException
+{
+    protected ?bool $logThrow = true
+
+    public function __construct(?\Throwable $previous = null)
+    
+...
+```
+
 
 ## Contribuindo
 

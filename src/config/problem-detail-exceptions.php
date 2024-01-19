@@ -15,7 +15,12 @@ return [
         ExceptionsFieldsEnum::USER_MESSAGE,
         ExceptionsFieldsEnum::USER_TITLE,
         ExceptionsFieldsEnum::LOCATION,
-        ExceptionsFieldsEnum::TRACE_ID
+        ExceptionsFieldsEnum::TRACE_ID,
+        ExceptionsFieldsEnum::PREVIOUS_MESSAGE,
+        ExceptionsFieldsEnum::PREVIOUS_CODE,
+        ExceptionsFieldsEnum::PREVIOUS_TYPE,
+        ExceptionsFieldsEnum::PREVIOUS_LOCATION
+
     ],
     'renderable_fields_list' => [
         ExceptionsFieldsEnum::TITLE,

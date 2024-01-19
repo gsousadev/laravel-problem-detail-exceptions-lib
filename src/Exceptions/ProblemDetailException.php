@@ -15,6 +15,7 @@ abstract class ProblemDetailException extends Exception
     private string $logAppName;
     private array $renderableFields;
     private array $fields;
+    protected ?bool $logThrow = null;
 
     public function __construct(
         private string $title,
@@ -25,32 +26,45 @@ abstract class ProblemDetailException extends Exception
         private string $internalCode,
         private ?\Throwable $previous = null
     ) {
-        $this->message = $this->title . ' - ' . $this->detail;
-        $this->message = $this->previous ? $this->message . ' - ' . $this->previous->getMessage() : $this->message;
+        $this->message = $this->title;
         $this->code = $this->httpStatus;
         $this->instance = get_class($this);
         $this->logAppName = strtoupper(config('problem-detail-exceptions.app_name'));
-
         $this->validateConfigFields();
         $this->renderableFields = $this->generateRenderableFieldsByConfig();
-        $this->fields = $this->generateFieldsFieldsByConfig();
+        $this->fields = $this->generateFieldsByConfig();
 
         parent::__construct($this->message, $this->code, $this->previous);
+
+        $isDefaultEnableAndLogThrowNull = (is_null($this->logThrow) &&
+            config('problem-detail-exceptions.enable_log_in_exception'));
+
+        if ($isDefaultEnableAndLogThrowNull || $this->logThrow) {
+            Log::error(
+                '[' . $this->logAppName . '][' . $this->internalCode . ']',
+                $this->toArray()
+            );
+        }
     }
 
     public function toArray(): array
     {
         $allFields = [
-            ExceptionsFieldsEnum::TYPE->value          => $this->instance,
-            ExceptionsFieldsEnum::TITLE->value         => $this->title,
-            ExceptionsFieldsEnum::STATUS->value        => $this->httpStatus ?? $this->code,
-            ExceptionsFieldsEnum::DETAIL->value        => $this->detail,
-            ExceptionsFieldsEnum::INTERNAL_CODE->value => $this->internalCode,
-            ExceptionsFieldsEnum::MESSAGE->value       => $this->message,
-            ExceptionsFieldsEnum::USER_MESSAGE->value  => $this->userMessage,
-            ExceptionsFieldsEnum::USER_TITLE->value    => $this->userTitle,
-            ExceptionsFieldsEnum::LOCATION->value      => $this->file . ':' . $this->line,
-            ExceptionsFieldsEnum::TRACE_ID->value      => data_get(Log::sharedContext(), 'trace_id'),
+            ExceptionsFieldsEnum::TYPE->value              => $this->instance,
+            ExceptionsFieldsEnum::TITLE->value             => $this->title,
+            ExceptionsFieldsEnum::STATUS->value            => $this->httpStatus ?? $this->code,
+            ExceptionsFieldsEnum::DETAIL->value            => $this->detail,
+            ExceptionsFieldsEnum::INTERNAL_CODE->value     => $this->internalCode,
+            ExceptionsFieldsEnum::MESSAGE->value           => $this->message,
+            ExceptionsFieldsEnum::USER_MESSAGE->value      => $this->userMessage,
+            ExceptionsFieldsEnum::USER_TITLE->value        => $this->userTitle,
+            ExceptionsFieldsEnum::LOCATION->value          => $this->file . ':' . $this->line,
+            ExceptionsFieldsEnum::TRACE_ID->value          => data_get(Log::sharedContext(), 'trace_id'),
+            ExceptionsFieldsEnum::PREVIOUS_MESSAGE->value  => $this->previous->getMessage() ?? null,
+            ExceptionsFieldsEnum::PREVIOUS_TYPE->value     => $this->previous::class ?? null,
+            ExceptionsFieldsEnum::PREVIOUS_CODE->value     => $this->previous->getCode() ?? null,
+            ExceptionsFieldsEnum::PREVIOUS_LOCATION->value => $this->previous->file . ':' . $this->previous->line ??
+                null,
         ];
 
         return array_filter(
@@ -76,17 +90,6 @@ abstract class ProblemDetailException extends Exception
         return new Response($data, $this->httpStatus);
     }
 
-    public function report(): bool
-    {
-        if (config('problem-detail-exceptions.enable_log_in_exception')) {
-            Log::error(
-                '[' . $this->logAppName . '][' . $this->internalCode . ']',
-                $this->toArray()
-            );
-        }
-
-        return true;
-    }
 
     public function getTitle(): string
     {
@@ -164,7 +167,7 @@ abstract class ProblemDetailException extends Exception
         );
     }
 
-    private function generateFieldsFieldsByConfig()
+    private function generateFieldsByConfig()
     {
         $fields = config('problem-detail-exceptions.available_fields_list');
 
@@ -176,4 +179,3 @@ abstract class ProblemDetailException extends Exception
         );
     }
 }
-
