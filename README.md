@@ -1,6 +1,6 @@
 # Laravel Problem Detail Exceptions
 
-[![Versão](https://img.shields.io/badge/vers%C3%A3o-1.1.0-beta)](https://github.com/seu-usuario/sua-lib/releases)
+[![Versão](https://img.shields.io/badge/vers%C3%A3o-1.2.0-beta)](https://github.com/seu-usuario/sua-lib/releases)
 [![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)](https://opensource.org/licenses/MIT)
 
 Esse projeto tem por objetivo prover uma biblioteca Laravel que permite implementar de maneira simples e rápida um padrão de exceptions, seguindo os conceitos da [RFC de problem details](https://datatracker.ietf.org/doc/html/rfc7807)
@@ -21,6 +21,42 @@ php artisan vendor:publish --tag=problem-detail-exceptions
 
 Após a publicação do pacote deve ser criado um arquivo de configuração para o projeto no seguinte caminho: `/config/problem-detail-exceptions.php`.
 
+```php
+<?php
+
+use Gsousadev\LaravelProblemDetailExceptions\Enums\ExceptionsFieldsEnum;
+
+return [
+    'app_name' => env('PROBLEM_DETAIL_EXCEPTION_APP_NAME', 'APP'),
+    'log_throw' => env('PROBLEM_DETAIL_EXCEPTION_GENERATE_LOGS', true),
+    'available_fields_list' => [
+        ExceptionsFieldsEnum::TYPE,
+        ExceptionsFieldsEnum::TITLE,
+        ExceptionsFieldsEnum::STATUS,
+        ExceptionsFieldsEnum::DETAIL,
+        ExceptionsFieldsEnum::INTERNAL_CODE,
+        ExceptionsFieldsEnum::MESSAGE,
+        ExceptionsFieldsEnum::USER_MESSAGE,
+        ExceptionsFieldsEnum::USER_TITLE,
+        ExceptionsFieldsEnum::LOCATION,
+        ExceptionsFieldsEnum::TRACE_ID,
+        ExceptionsFieldsEnum::PREVIOUS_MESSAGE,
+        ExceptionsFieldsEnum::PREVIOUS_CODE,
+        ExceptionsFieldsEnum::PREVIOUS_TYPE,
+        ExceptionsFieldsEnum::PREVIOUS_LOCATION
+
+    ],
+    'renderable_fields_list' => [
+        ExceptionsFieldsEnum::TITLE,
+        ExceptionsFieldsEnum::STATUS,
+        ExceptionsFieldsEnum::USER_MESSAGE,
+        ExceptionsFieldsEnum::USER_TITLE,
+    ],
+
+];
+
+```
+
 ## Configurando
 
 Este pacote permite algumas configurações de customização. Para isso deve-se user o arquivo `problem-detail-exceptions.php`
@@ -28,6 +64,12 @@ Este pacote permite algumas configurações de customização. Para isso deve-se
 Para ter dados coerentes dentro do fluxo é importante ter duas variáveis de ambiente implementadas:
 - **PROBLEM_DETAIL_EXCEPTION_APP_NAME** : Indica o nome que pode aparecer nos logs referente ao nome do projeto ou app que o pacote esta sendo usado.
 - **PROBLEM_DETAIL_EXCEPTION_GENERATE_LOGS** : Esta variável permite que sejam ligados e desligados os logs que devem ser publicados em casos de erro.
+
+Ex: 
+```dotenv
+PROBLEM_DETAIL_EXCEPTION_APP_NAME=nome_do_aplicativo
+PROBLEM_DETAIL_EXCEPTION_GENERATE_LOGS=true
+```
 
 Existe também uma configuração que pode ser feita dentro do arquivo de configuração, informando quais campos devem ser considerados para exceptions de APIs
 
@@ -56,7 +98,12 @@ enum ExceptionsFieldsEnum: string
     case USER_TITLE = 'user_title';
     case LOCATION = 'location';
     case TRACE_ID = 'trace_id';
+    case PREVIOUS_MESSAGE = 'previous_message';
+    case PREVIOUS_TYPE = 'previous_type';
+    case PREVIOUS_CODE = 'previous_code';
+    case PREVIOUS_LOCATION = 'previous_location';
 }
+
 
 ```
 
@@ -137,7 +184,27 @@ try {
 }
 ```
 
-## Padronizando Exceptions de maneira Automática
+### Log por Exception
+
+Tambem é possível configurar o log em cada exception usando a opção `$logThrow`. Essa opção permite que possamos 
+configurar cada excessão para gerar logs, ou não, independente da configuração geral. Caso ela seja omitida a 
+configuração geral de logs será levada em consideração.
+
+Ex: 
+
+```php
+...
+
+class ExampleException extends ProblemDetailException
+{
+    protected ?bool $logThrow = true
+
+    public function __construct(?\Throwable $previous = null)
+    
+...
+```
+
+### Padronizando Exceptions de maneira Automática
 
 Existe uma classe que pode ser usada em conjunto com o Handler de Exceptions do Laravel para permitir que todas as 
 exceptions lançadas e que passem pelo handler possam ser transformadas e normalizadas no padrão 'Problem Detail'. 
@@ -180,7 +247,7 @@ class Handler extends ExceptionHandler
 
 ## Contribuindo
 
-O projeto esta em fase de construção da ideia inicial, mas apontamentos de melhorias são muito importantes para o 
+O projeto esta em fase de construção e apontamentos de melhorias são muito importantes para o 
 crescimento. Para sugerir uma melhoria use as Issues do github.
 
 ## Licença
