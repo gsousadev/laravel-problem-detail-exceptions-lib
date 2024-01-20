@@ -1,6 +1,6 @@
 # Laravel Problem Detail Exceptions
 
-[![Versão](https://img.shields.io/badge/vers%C3%A3o-1.2.0-beta)](https://github.com/seu-usuario/sua-lib/releases)
+[![Versão](https://img.shields.io/badge/vers%C3%A3o-1.2.1-beta)](https://github.com/seu-usuario/sua-lib/releases)
 [![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)](https://opensource.org/licenses/MIT)
 
 Esse projeto tem por objetivo prover uma biblioteca Laravel que permite implementar de maneira simples e rápida um padrão de exceptions, seguindo os conceitos da [RFC de problem details](https://datatracker.ietf.org/doc/html/rfc7807)
