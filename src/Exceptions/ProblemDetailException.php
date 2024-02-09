@@ -60,11 +60,12 @@ abstract class ProblemDetailException extends Exception
             ExceptionsFieldsEnum::USER_TITLE->value        => $this->userTitle,
             ExceptionsFieldsEnum::LOCATION->value          => ($this->getFile() . ':' . $this->getLine()),
             ExceptionsFieldsEnum::TRACE_ID->value          => data_get(Log::sharedContext(), 'trace_id'),
-            ExceptionsFieldsEnum::PREVIOUS_MESSAGE->value  => $this->previous->getMessage() ?? null,
-            ExceptionsFieldsEnum::PREVIOUS_TYPE->value     => $this->previous::class ?? null,
-            ExceptionsFieldsEnum::PREVIOUS_CODE->value     => $this->previous->getCode() ?? null,
-            ExceptionsFieldsEnum::PREVIOUS_LOCATION->value => ($this->previous->getFile() . ':' .
-                    $this->previous->getLine()) ?? null,
+            ExceptionsFieldsEnum::PREVIOUS_MESSAGE->value  => $this->previous?->getMessage() ?? null,
+            ExceptionsFieldsEnum::PREVIOUS_TYPE->value     => !empty($this->previous) ?
+                $this->previous::class : null,
+            ExceptionsFieldsEnum::PREVIOUS_CODE->value     => $this->previous?->getCode() ?? null,
+            ExceptionsFieldsEnum::PREVIOUS_LOCATION->value => ($this->previous?->getFile() . ':' .
+                    $this->previous?->getLine()) ?? null,
         ];
 
 
